@@ -25,34 +25,46 @@ export default class AddTodo extends HTMLElement {
 
 		const addButton = shadowRoot.querySelector('.add-button');
 		const todoInput = shadowRoot.querySelector('#todo-input');
+		const lowPriorityRadio = shadowRoot.querySelector('#low');
 
 		addButton.addEventListener('click', () => {
 			const todoText = todoInput.value.trim();
+			const priority = this.getPriorityValue();
 			if (todoText !== '') {
 				this.dispatchEvent(
 					new CustomEvent('addTask', {
 						bubbles: true,
-						detail: { text: todoText, done: false },
+						detail: {
+							text: todoText,
+							done: false,
+							priority: priority,
+						},
 						composed: true,
 					})
 				);
 				todoInput.value = '';
+				lowPriorityRadio.checked = true;
 			}
 		});
 
 		todoInput.addEventListener('keydown', (event) => {
-			const todoText = todoInput.value.trim();
-			if (event.key === 'Enter' && todoText !== '') {
-				this.dispatchEvent(
-					new CustomEvent('addTask', {
-						bubbles: true,
-						detail: { text: todoText, done: false },
-						composed: true,
-					})
-				);
-				todoInput.value = '';
+			if (event.key === 'Enter') {
+				addButton.click();
 			}
 		});
+	}
+
+	getPriorityValue() {
+		const mediumPriorityRadio = this.shadowRoot.querySelector('#medium');
+		const highPriorityRadio = this.shadowRoot.querySelector('#high');
+
+		if (mediumPriorityRadio.checked) {
+			return 'medium';
+		} else if (highPriorityRadio.checked) {
+			return 'high';
+		} else {
+			return 'low';
+		}
 	}
 
 	htmlToElement(html) {

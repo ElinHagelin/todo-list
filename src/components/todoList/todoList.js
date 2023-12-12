@@ -75,17 +75,41 @@ export default class TodoList extends HTMLElement {
 	}
 
 	filterChangeHandler(event) {
-		const { filterText, checked } = event.detail;
+		// const { filterText, checked, priority } = event.detail;
+		// let filteredTasks = null;
+
+		// if (filterText !== '') {
+		// 	filteredTasks = this.tasks.filter(
+		// 		({ text, done }) =>
+		// 			text.toLowerCase().includes(filterText.toLowerCase()) &&
+		// 			(!checked || (checked && done))
+		// 	);
+		// } else {
+		// 	filteredTasks = this.tasks.filter(
+		// 		({ done }) => !checked || (checked && done)
+		// 	);
+		// }
+
+		// this.updateList(filteredTasks);
+
+		const { filterText, checked, priority } = event.detail;
 		let filteredTasks = null;
-		if (filterText !== '') {
+
+		if (filterText !== '' || priority !== 'all') {
 			filteredTasks = this.tasks.filter(
-				({ text, done }) =>
+				({ text, done, priority: taskPriority }) =>
 					text.toLowerCase().includes(filterText.toLowerCase()) &&
-					(!checked || (checked && done))
+					(!checked || (checked && done)) &&
+					//  Filtrerar på prioritet. Om priority är satt till 'all', kommer alla uppgifter att inkluderas. Annars kommer bara uppgifter med matchande prioritet att inkluderas.
+					(priority === 'all' || priority === taskPriority)
 			);
 		} else {
 			filteredTasks = this.tasks.filter(
-				({ done }) => !checked || (checked && done)
+				({ done, priority: taskPriority }) =>
+					!checked ||
+					(checked &&
+						done &&
+						(priority === 'all' || priority === taskPriority))
 			);
 		}
 

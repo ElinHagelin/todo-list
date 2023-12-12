@@ -26,6 +26,7 @@ export default class FilterTodos extends HTMLElement {
 		const filterCheckbox = shadowRoot.querySelector('#filter-checkbox');
 		const filterInput = shadowRoot.querySelector('#filter-input');
 		const filterButton = shadowRoot.querySelector('.filter-button');
+		const prioritySelect = shadowRoot.querySelector('#priority-select');
 
 		const dispatchFilterEvent = () => {
 			const eventOptions = {
@@ -33,6 +34,7 @@ export default class FilterTodos extends HTMLElement {
 				detail: {
 					filterText: filterInput.value,
 					checked: filterCheckbox.checked,
+					priority: prioritySelect.value,
 				},
 				composed: true,
 			};
@@ -49,6 +51,8 @@ export default class FilterTodos extends HTMLElement {
 				dispatchFilterEvent();
 			}
 		});
+
+		prioritySelect.addEventListener('change', dispatchFilterEvent);
 	}
 
 	htmlToElement(html) {

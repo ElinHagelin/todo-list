@@ -18,9 +18,33 @@
 	.add-button:hover {
 		background-color: #45a049;
 	}
+
+	.radio-container {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.radio-container > div {
+		display: flex;
+		flex-direction: column;
+	}
 </style>
 
 <div class="add-container">
 	<input type="text" id="todo-input" />
 	<button class="add-button">Add</button>
+	<div class="radio-container">
+		<div>
+			<input type="radio" id="low" name="priority" checked />
+			<label for="low">low</label>
+		</div>
+		<div>
+			<input type="radio" id="medium" name="priority" />
+			<label for="medium">medium</label>
+		</div>
+		<div>
+			<input type="radio" id="high" name="priority" />
+			<label for="high">high</label>
+		</div>
+	</div>
 </div>
