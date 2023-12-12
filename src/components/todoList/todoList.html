@@ -23,7 +23,7 @@
 		align-items: center;
 	}
 
-	.list li input[type="checkbox"] {
+	.list li input[type='checkbox'] {
 		margin-right: 10px;
 	}
 
@@ -31,37 +31,31 @@
 		flex-grow: 1;
 	}
 
-	.list li button {
-		background-color: #f44336;
+	.delete-button,
+	.edit-button,
+	.add-button {
 		color: #fff;
 		border: none;
 		padding: 5px 10px;
-		margin-left: 10px;
 		cursor: pointer;
 	}
 
-	.list li button:hover {
+	.delete-button {
+		background-color: #f44336;
+		margin-left: 10px;
+	}
+
+	.delete-button:hover {
 		background-color: #d32f2f;
 	}
 
-	.add-container {
-		margin-top: 10px;
+	.edit-button {
+		background-color: #17aaee;
+		/* margin-left: 10px; */
 	}
 
-	#todo-input {
-		padding: 5px;
-	}
-
-	.add-button {
-		padding: 5px 10px;
-		background-color: #4caf50;
-		color: #fff;
-		border: none;
-		cursor: pointer;
-	}
-
-	.add-button:hover {
-		background-color: #45a049;
+	.edit-button:hover {
+		background-color: #078cca;
 	}
 
 	.done {
@@ -72,11 +66,6 @@
 <div class="todo-container">
 	<h1 class="todo-heading">My todos</h1>
 	<filter-todos></filter-todos>
-	<div class="add-container">
-		<input type="text" id="todo-input">
-		<button class="add-button">Add</button>
-	</div>
-	<ul class="list">
-	</ul>
-
+	<add-todo></add-todo>
+	<ul class="list"></ul>
 </div>

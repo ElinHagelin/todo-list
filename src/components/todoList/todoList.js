@@ -1,7 +1,10 @@
 import html from './todoList.html';
 import FilterTodos from '../filterTodos/filter.js';
+import AddTodo from '../addTodo/add.js';
 import { taskElement } from '../todoTask/task.js';
+
 customElements.define('filter-todos', FilterTodos);
+customElements.define('add-todo', AddTodo);
 
 export default class TodoList extends HTMLElement {
 	constructor() {
@@ -26,8 +29,12 @@ export default class TodoList extends HTMLElement {
 	}
 
 	setupEventListeners() {
+		console.log(this);
 		const { shadowRoot } = this;
 
+		this.addEventListener('addTask', (event) =>
+			this.addTaskHandler(event.detail)
+		);
 		this.addEventListener(
 			'filterChange',
 			this.filterChangeHandler.bind(this)
@@ -37,16 +44,7 @@ export default class TodoList extends HTMLElement {
 			'checkboxToggle',
 			this.checkboxToggleHandler.bind(this)
 		);
-
-		const addButton = shadowRoot.querySelector('.add-button');
-		const todoInput = shadowRoot.querySelector('#todo-input');
-
-		addButton.addEventListener('click', () =>
-			this.addTaskHandler(todoInput)
-		);
-		todoInput.addEventListener('keydown', (event) =>
-			this.enterKeyHandler(event, todoInput)
-		);
+		this.addEventListener('editTask', this.editTaskHandler.bind(this));
 	}
 
 	loadTasksFromCookie() {
@@ -64,29 +62,16 @@ export default class TodoList extends HTMLElement {
 		}
 	}
 
-	addTaskHandler(todoInput) {
-		const { shadowRoot } = this;
-		const todoText = todoInput.value.trim();
-
-		if (todoText !== '') {
-			const todo = { text: todoText, done: false };
-			const listItem = taskElement(todo, this);
-
-			this.tasks.push(todo);
-
-			const list = shadowRoot.querySelector('.list');
-			list.appendChild(listItem);
-
-			todoInput.value = '';
-			document.cookie = `todos=${JSON.stringify(this.tasks)}`;
-		}
+	addTaskHandler(todo) {
+		const listItem = taskElement(todo, this);
+		this.tasks.push(todo);
+		const list = this.shadowRoot.querySelector('.list');
+		list.appendChild(listItem);
+		this.updateCookieList();
 	}
 
-	enterKeyHandler(event, todoInput) {
-		const todoText = todoInput.value.trim();
-		if (event.key === 'Enter') {
-			this.addTaskHandler(todoText, todoInput);
-		}
+	editTaskHandler() {
+		this.updateCookieList();
 	}
 
 	filterChangeHandler(event) {
@@ -110,11 +95,11 @@ export default class TodoList extends HTMLElement {
 	deleteHandler(event) {
 		const index = this.tasks.findIndex(({ text }) => text === event.detail);
 		this.tasks.splice(index, 1);
-		document.cookie = `todos=${JSON.stringify(this.tasks)}`;
+		this.updateCookieList();
 	}
 
 	checkboxToggleHandler() {
-		document.cookie = `todos=${JSON.stringify(this.tasks)}`;
+		this.updateCookieList();
 	}
 
 	updateList(filteredTasks) {
@@ -125,6 +110,10 @@ export default class TodoList extends HTMLElement {
 			const listItem = taskElement(task, this);
 			list.appendChild(listItem);
 		});
+	}
+
+	updateCookieList() {
+		document.cookie = `todos=${JSON.stringify(this.tasks)}`;
 	}
 
 	htmlToElement(html) {

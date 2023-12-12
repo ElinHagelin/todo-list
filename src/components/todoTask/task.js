@@ -1,11 +1,19 @@
 export const taskElement = (todo, list) => {
 	const listItem = document.createElement('li');
-
 	const checkbox = document.createElement('input');
-	checkbox.type = 'checkbox';
 	const text = document.createElement('span');
-	// console.log(todo);
+	const deleteButton = document.createElement('button');
+	const editButton = document.createElement('button');
+	const editInput = document.createElement('input');
+
+	checkbox.type = 'checkbox';
 	text.textContent = todo.text;
+	deleteButton.textContent = 'Delete';
+	deleteButton.classList.add('delete-button');
+	editButton.textContent = 'Edit';
+	editButton.classList.add('edit-button');
+	editInput.type = 'text';
+	editInput.style.display = 'none';
 
 	if (todo.done === true) {
 		checkbox.checked = true;
@@ -34,8 +42,6 @@ export const taskElement = (todo, list) => {
 		);
 	});
 
-	const deleteButton = document.createElement('button');
-	deleteButton.textContent = 'Delete';
 	deleteButton.addEventListener('click', () => {
 		listItem.remove();
 		list.dispatchEvent(
@@ -47,8 +53,40 @@ export const taskElement = (todo, list) => {
 		);
 	});
 
+	editInput.addEventListener('keydown', (event) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			editButton.click();
+		}
+	});
+
+	editButton.addEventListener('click', () => {
+		if (editInput.style.display === 'none') {
+			editInput.style.display = 'inline-block';
+			editInput.value = text.textContent;
+			text.style.display = 'none';
+		} else {
+			editInput.style.display = 'none';
+			text.style.display = 'inline-block';
+			const newText = editInput.value.trim();
+			if (newText !== '') {
+				text.textContent = newText;
+				todo.text = newText;
+				list.dispatchEvent(
+					new CustomEvent('editTask', {
+						bubbles: true,
+						detail: todo,
+						composed: true,
+					})
+				);
+			}
+		}
+	});
+
 	listItem.appendChild(checkbox);
 	listItem.appendChild(text);
+	listItem.appendChild(editInput);
+	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
 
 	return listItem;
