@@ -1,3 +1,4 @@
+import { magnifyingGlass } from '../../assets/icons';
 import html from './filter.html';
 
 export default class FilterTodos extends HTMLElement {
@@ -18,6 +19,11 @@ export default class FilterTodos extends HTMLElement {
 		shadowRoot.innerHTML = '';
 		shadowRoot.appendChild(cssContent);
 		shadowRoot.appendChild(htmlContent);
+
+		const searchIcon = document.createElement('i');
+		searchIcon.innerHTML = magnifyingGlass;
+		const filterButton = shadowRoot.querySelector('.filter-button');
+		filterButton.appendChild(searchIcon);
 	}
 
 	setupEventListeners() {

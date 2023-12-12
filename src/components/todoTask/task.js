@@ -1,3 +1,5 @@
+import { pen, trashCan } from '../../assets/icons';
+
 export const taskElement = (todo, list) => {
 	const listItem = document.createElement('li');
 	const checkbox = document.createElement('input');
@@ -5,12 +7,17 @@ export const taskElement = (todo, list) => {
 	const deleteButton = document.createElement('button');
 	const editButton = document.createElement('button');
 	const editInput = document.createElement('input');
+	const editIcon = document.createElement('i');
+	const deleteIcon = document.createElement('i');
 
+	// editIcon.classList.add(cat);
+	editIcon.innerHTML = pen;
+	deleteIcon.innerHTML = trashCan;
 	checkbox.type = 'checkbox';
 	text.textContent = todo.text;
-	deleteButton.textContent = 'Delete';
+	// deleteButton.textContent = 'Delete';
 	deleteButton.classList.add('delete-button');
-	editButton.textContent = 'Edit';
+	// editButton.innerText = ;
 	editButton.classList.add('edit-button');
 	editInput.type = 'text';
 	editInput.style.display = 'none';
@@ -60,7 +67,7 @@ export const taskElement = (todo, list) => {
 		}
 	});
 
-	editButton.addEventListener('click', () => {
+	editIcon.addEventListener('click', () => {
 		if (editInput.style.display === 'none') {
 			editInput.style.display = 'inline-block';
 			editInput.value = text.textContent;
@@ -83,11 +90,16 @@ export const taskElement = (todo, list) => {
 		}
 	});
 
+	editButton.append(editIcon);
+	deleteButton.append(deleteIcon);
+
 	listItem.appendChild(checkbox);
 	listItem.appendChild(text);
 	listItem.appendChild(editInput);
+	// listItem.appendChild(editIcon);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
+	// listItem.appendChild(deleteIcon);
 
 	return listItem;
 };

@@ -10,14 +10,22 @@
 	.add-button {
 		color: #fff;
 		border: none;
-		padding: 5px 10px;
+		/* padding: 5px; */
+		padding-inline: 0;
 		cursor: pointer;
-		background-color: #4caf50;
+		/* background-color: #4caf50; */
+		background-color: transparent;
+		display: inline-flex;
 	}
 
-	.add-button:hover {
-		background-color: #45a049;
+	.add-button > i {
+		color: rgb(29, 29, 29);
+		width: 20px;
 	}
+
+	/* .add-button:hover {
+		background-color: #45a049;
+	} */
 
 	.radio-container {
 		display: flex;
@@ -32,7 +40,7 @@
 
 <div class="add-container">
 	<input type="text" id="todo-input" />
-	<button class="add-button">Add</button>
+	<button class="add-button"></button>
 	<div class="radio-container">
 		<div>
 			<input type="radio" id="low" name="priority" checked />

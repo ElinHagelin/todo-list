@@ -9,21 +9,31 @@
 
 	.filter-button {
 		padding: 5px 10px;
-		background-color: #eacc37;
+		/* background-color: #eacc37; */
+		background-color: transparent;
 		color: #fff;
 		border: none;
 		cursor: pointer;
+		display: inline-flex;
 	}
 
-	.filter-button:hover {
-		background-color: #d6b926;
+	.filter-button > i {
+		width: 20px;
+		color: rgb(29, 29, 29);
 	}
+
+	/* .filter-button:hover {
+		background-color: #d6b926;
+	} */
 </style>
 
 <div class="filter-todos">
-	<input type="checkbox" id="filter-checkbox" />
 	<input type="text" id="filter-input" />
-	<button class="filter-button">Filtrera</button>
+	<button class="filter-button"></button>
+	<div>
+		<label for="filter-checkbox">Filter by status</label>
+		<input type="checkbox" id="filter-checkbox" />
+	</div>
 	<div>
 		<label for="priority-select">Filter by priority</label>
 		<select name="priority-filter" id="priority-select">

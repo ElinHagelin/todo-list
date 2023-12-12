@@ -1,8 +1,11 @@
 <style>
 	.todo-container {
-		max-width: 400px;
+		max-width: 600px;
 		margin: 0 auto;
 		font-family: Arial, sans-serif;
+		background-color: #fff;
+		padding: 2em 5em 3em;
+		border-radius: 10px;
 	}
 
 	.todo-heading {
@@ -32,15 +35,16 @@
 	}
 
 	.delete-button,
-	.edit-button,
-	.add-button {
+	.edit-button {
 		color: #fff;
 		border: none;
-		padding: 5px 10px;
+		padding: 5px;
 		cursor: pointer;
+		display: inline-flex;
+		background-color: transparent;
 	}
 
-	.delete-button {
+	/* .delete-button {
 		background-color: #f44336;
 		margin-left: 10px;
 	}
@@ -51,21 +55,27 @@
 
 	.edit-button {
 		background-color: #17aaee;
-		/* margin-left: 10px; */
 	}
 
 	.edit-button:hover {
 		background-color: #078cca;
-	}
+	} */
 
 	.done {
 		text-decoration: line-through;
+	}
+
+	li i {
+		color: rgb(29, 29, 29);
+		width: 20px;
+		/* height: 25px; */
+		/* margin: 0 10px; */
 	}
 </style>
 
 <div class="todo-container">
 	<h1 class="todo-heading">My todos</h1>
-	<filter-todos></filter-todos>
 	<add-todo></add-todo>
+	<filter-todos></filter-todos>
 	<ul class="list"></ul>
 </div>

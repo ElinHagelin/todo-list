@@ -1,3 +1,4 @@
+import { plus } from '../../assets/icons';
 import html from './add.html';
 
 export default class AddTodo extends HTMLElement {
@@ -24,6 +25,9 @@ export default class AddTodo extends HTMLElement {
 		const { shadowRoot } = this;
 
 		const addButton = shadowRoot.querySelector('.add-button');
+		const plusIcon = document.createElement('i');
+		plusIcon.innerHTML = plus;
+		addButton.appendChild(plusIcon);
 		const todoInput = shadowRoot.querySelector('#todo-input');
 		const lowPriorityRadio = shadowRoot.querySelector('#low');
 

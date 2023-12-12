@@ -1,16 +1,19 @@
 :root {
 	--header-background: #444444;
-	--white: #FFF;
+	--white: #fff;
+	display: grid;
+	place-content: center;
+	width: 100%;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #153677, #4e085f);
 }
 
 html,
 body {
 	padding: 0px;
 	margin: 0px;
-	display: grid;
-	place-content: center;
+	box-sizing: border-box;
 }
-
 
 app-header {
 	--background: var(--header-background);
