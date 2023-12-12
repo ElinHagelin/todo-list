@@ -1,0 +1,18 @@
+:root {
+	--header-background: #444444;
+	--white: #FFF;
+}
+
+html,
+body {
+	padding: 0px;
+	margin: 0px;
+	display: grid;
+	place-content: center;
+}
+
+
+app-header {
+	--background: var(--header-background);
+	--h1Color: var(--white);
+}

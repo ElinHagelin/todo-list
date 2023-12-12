@@ -1,0 +1,82 @@
+<style>
+	.todo-container {
+		max-width: 400px;
+		margin: 0 auto;
+		font-family: Arial, sans-serif;
+	}
+
+	.todo-heading {
+		color: #333;
+	}
+
+	.list {
+		list-style: none;
+		padding-inline: 0;
+		padding: 0;
+	}
+
+	.list li {
+		margin: 10px 0;
+		padding: 10px;
+		border: 1px solid #ddd;
+		display: flex;
+		align-items: center;
+	}
+
+	.list li input[type="checkbox"] {
+		margin-right: 10px;
+	}
+
+	.list li span {
+		flex-grow: 1;
+	}
+
+	.list li button {
+		background-color: #f44336;
+		color: #fff;
+		border: none;
+		padding: 5px 10px;
+		margin-left: 10px;
+		cursor: pointer;
+	}
+
+	.list li button:hover {
+		background-color: #d32f2f;
+	}
+
+	.add-container {
+		margin-top: 10px;
+	}
+
+	#todo-input {
+		padding: 5px;
+	}
+
+	.add-button {
+		padding: 5px 10px;
+		background-color: #4caf50;
+		color: #fff;
+		border: none;
+		cursor: pointer;
+	}
+
+	.add-button:hover {
+		background-color: #45a049;
+	}
+
+	.done {
+		text-decoration: line-through;
+	}
+</style>
+
+<div class="todo-container">
+	<h1 class="todo-heading">My todos</h1>
+	<filter-todos></filter-todos>
+	<div class="add-container">
+		<input type="text" id="todo-input">
+		<button class="add-button">Add</button>
+	</div>
+	<ul class="list">
+	</ul>
+
+</div>
