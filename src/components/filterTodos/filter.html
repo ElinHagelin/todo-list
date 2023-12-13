@@ -3,44 +3,112 @@
 		margin-top: 10px;
 	}
 
-	#filter-input {
-		padding: 5px;
+	.search-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: #edeef0;
+		border-radius: 30px;
 	}
 
-	.filter-button {
-		padding: 5px 10px;
-		/* background-color: #eacc37; */
+	#search-input {
+		width: 100%;
+		border: none;
+		outline: none;
 		background-color: transparent;
-		color: #fff;
+		padding: 10px;
+		font-size: 17px;
+		padding-left: 20px;
+		color: black;
+	}
+
+	.search-button {
 		border: none;
 		cursor: pointer;
+		outline: none;
+		padding: 10px 30px;
+		border-radius: 30px;
+		background-color: #ff5945;
+		color: #fff;
+		font-size: 18px;
+		transition: all 0.25s ease;
 		display: inline-flex;
 	}
 
-	.filter-button > i {
+	.search-button > i {
 		width: 20px;
-		color: rgb(29, 29, 29);
+		/* color: rgb(29, 29, 29); */
 	}
 
-	/* .filter-button:hover {
-		background-color: #d6b926;
-	} */
+	.search-button:hover {
+		background-color: #e34938;
+	}
+
+	.filter-container {
+		display: flex;
+		justify-content: space-around;
+		margin: 0.5em 0;
+	}
+
+	.filter-checkbox-container,
+	.select-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#filter-checkbox {
+		/* margin-right: 10px; */
+
+		-webkit-appearance: none;
+		appearance: none;
+		width: 1.15em;
+		height: 1.15em;
+		border: 1px solid #000;
+		border-radius: 2px;
+		transform: translateY(-0.075em);
+		display: grid;
+		place-content: center;
+		cursor: pointer;
+	}
+
+	#filter-checkbox:checked {
+		border: 1px solid #8f8f8f;
+	}
+	#filter-checkbox::before {
+		content: '';
+		width: 0.5em;
+		height: 0.5em;
+		transform: scale(0);
+		transform-origin: bottom left;
+		transition: 0.12s transform ease-in-out;
+		box-shadow: inset 1em 1em #8f8f8f;
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	}
+
+	#filter-checkbox:checked::before {
+		transform: scale(1.1);
+	}
 </style>
 
 <div class="filter-todos">
-	<input type="text" id="filter-input" />
-	<button class="filter-button"></button>
-	<div>
-		<label for="filter-checkbox">Filter by status</label>
-		<input type="checkbox" id="filter-checkbox" />
+	<div class="search-container">
+		<input type="text" id="search-input" />
+		<button class="search-button"></button>
 	</div>
-	<div>
-		<label for="priority-select">Filter by priority</label>
-		<select name="priority-filter" id="priority-select">
-			<option value="all">All</option>
-			<option value="low">Low</option>
-			<option value="medium">Medium</option>
-			<option value="high">High</option>
-		</select>
+	<div class="filter-container">
+		<div class="filter-checkbox-container">
+			<label for="filter-checkbox">Filter by status</label>
+			<input type="checkbox" id="filter-checkbox" />
+		</div>
+		<div class="select-container">
+			<label for="priority-select">Filter by priority</label>
+			<select name="priority-filter" id="priority-select">
+				<option value="all">All</option>
+				<option value="low">Low</option>
+				<option value="medium">Medium</option>
+				<option value="high">High</option>
+			</select>
+		</div>
 	</div>
 </div>

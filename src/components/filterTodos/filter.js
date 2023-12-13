@@ -22,23 +22,23 @@ export default class FilterTodos extends HTMLElement {
 
 		const searchIcon = document.createElement('i');
 		searchIcon.innerHTML = magnifyingGlass;
-		const filterButton = shadowRoot.querySelector('.filter-button');
-		filterButton.appendChild(searchIcon);
+		const searchButton = shadowRoot.querySelector('.search-button');
+		searchButton.appendChild(searchIcon);
 	}
 
 	setupEventListeners() {
 		const { shadowRoot } = this;
 
 		const filterCheckbox = shadowRoot.querySelector('#filter-checkbox');
-		const filterInput = shadowRoot.querySelector('#filter-input');
-		const filterButton = shadowRoot.querySelector('.filter-button');
+		const searchInput = shadowRoot.querySelector('#search-input');
+		const searchButton = shadowRoot.querySelector('.search-button');
 		const prioritySelect = shadowRoot.querySelector('#priority-select');
 
 		const dispatchFilterEvent = () => {
 			const eventOptions = {
 				bubbles: true,
 				detail: {
-					filterText: filterInput.value,
+					filterText: searchInput.value,
 					checked: filterCheckbox.checked,
 					priority: prioritySelect.value,
 				},
@@ -50,9 +50,9 @@ export default class FilterTodos extends HTMLElement {
 
 		filterCheckbox.addEventListener('click', dispatchFilterEvent);
 
-		filterButton.addEventListener('click', dispatchFilterEvent);
+		searchButton.addEventListener('click', dispatchFilterEvent);
 
-		filterInput.addEventListener('keydown', (event) => {
+		searchInput.addEventListener('keydown', (event) => {
 			if (event.key === 'Enter') {
 				dispatchFilterEvent();
 			}

@@ -3,29 +3,47 @@
 		margin-top: 10px;
 	}
 
+	.add-input-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: #edeef0;
+		border-radius: 30px;
+	}
+
 	#todo-input {
-		padding: 5px;
+		width: 100%;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		padding: 10px;
+		font-size: 17px;
+		padding-left: 20px;
+		color: black;
 	}
 
 	.add-button {
-		color: #fff;
 		border: none;
-		/* padding: 5px; */
-		padding-inline: 0;
 		cursor: pointer;
-		/* background-color: #4caf50; */
-		background-color: transparent;
+		outline: none;
+		padding: 10px 30px;
+		border-radius: 30px;
+		background-color: #ff5945;
+		color: #fff;
+		font-size: 18px;
+		transition: all 0.25s ease;
 		display: inline-flex;
 	}
 
 	.add-button > i {
-		color: rgb(29, 29, 29);
+		/* color: rgb(29, 29, 29); */
 		width: 20px;
+		margin-bottom: -2px;
 	}
 
-	/* .add-button:hover {
-		background-color: #45a049;
-	} */
+	.add-button:hover {
+		background-color: #e34938;
+	}
 
 	.radio-container {
 		display: flex;
@@ -35,12 +53,41 @@
 	.radio-container > div {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		gap: 0.3em;
+	}
+
+	/* input[type='radio']:checked {
+		color: #8f8f8f;
+	} */
+
+	input[type='radio'] {
+		appearance: none;
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background-clip: content-box;
+		/* border: 1px solid black; */
+		border: 1px solid #8f8f8f;
+		/* background-color: black; */
+		transition: all 0.2s;
+	}
+
+	input[type='radio']:checked {
+		/* background-color: #8f8f8f;
+		padding: 3px;
+		border: 1px solid #8f8f8f; */
+		background-color: rgb(36, 0, 128);
+		padding: 3px;
+		border: 1px solid rgb(36, 0, 128);
 	}
 </style>
 
 <div class="add-container">
-	<input type="text" id="todo-input" />
-	<button class="add-button"></button>
+	<div class="add-input-container">
+		<input type="text" id="todo-input" />
+		<button class="add-button"></button>
+	</div>
 	<div class="radio-container">
 		<div>
 			<input type="radio" id="low" name="priority" checked />

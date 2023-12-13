@@ -1,6 +1,7 @@
 <style>
 	.todo-container {
 		max-width: 600px;
+		height: 65vh;
 		margin: 0 auto;
 		font-family: Arial, sans-serif;
 		background-color: #fff;
@@ -16,18 +17,66 @@
 		list-style: none;
 		padding-inline: 0;
 		padding: 0;
+		overflow-y: auto; /* Lägg till denna egenskap för att möjliggöra vertikal scrollning */
+		max-height: calc(40vh - 5em);
+
+		scrollbar-width: thin; /* För Firefox */
+		scrollbar-color: #4e085f transparent;
+	}
+
+	.list::-webkit-scrollbar {
+		width: 6px;
+	}
+	.list::-webkit-scrollbar-track {
+		background-color: transparent; /* Färg på spåret */
+	}
+	.list::-webkit-scrollbar-thumb {
+		background: linear-gradient(#153677, #4e085f);
+		border-radius: 4px;
 	}
 
 	.list li {
 		margin: 10px 0;
 		padding: 10px;
-		border: 1px solid #ddd;
 		display: flex;
 		align-items: center;
 	}
 
 	.list li input[type='checkbox'] {
 		margin-right: 10px;
+
+		-webkit-appearance: none;
+		appearance: none;
+		width: 1.15em;
+		height: 1.15em;
+		border: 1px solid #000;
+		border-radius: 2px;
+		transform: translateY(-0.075em);
+		display: grid;
+		place-content: center;
+		cursor: pointer;
+	}
+
+	.list li input[type='checkbox']:checked {
+		border: 1px solid #8f8f8f;
+	}
+	.list li input[type='checkbox']::before {
+		content: '';
+		width: 0.5em;
+		height: 0.5em;
+		transform: scale(0);
+		transform-origin: bottom left;
+		transition: 0.12s transform ease-in-out;
+		box-shadow: inset 1em 1em #8f8f8f;
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	}
+
+	.list li input[type='checkbox']:checked::before {
+		transform: scale(1.1);
+	}
+
+	.list li input[type='checkbox']:checked + span {
+		color: #8f8f8f;
 	}
 
 	.list li span {
@@ -42,24 +91,14 @@
 		cursor: pointer;
 		display: inline-flex;
 		background-color: transparent;
+		margin: 0 0.2em;
+		transition: all 0.2s;
 	}
 
-	/* .delete-button {
-		background-color: #f44336;
-		margin-left: 10px;
-	}
-
-	.delete-button:hover {
-		background-color: #d32f2f;
-	}
-
-	.edit-button {
-		background-color: #17aaee;
-	}
-
+	.delete-button:hover,
 	.edit-button:hover {
-		background-color: #078cca;
-	} */
+		transform: scale(1.15);
+	}
 
 	.done {
 		text-decoration: line-through;
@@ -67,9 +106,7 @@
 
 	li i {
 		color: rgb(29, 29, 29);
-		width: 20px;
-		/* height: 25px; */
-		/* margin: 0 10px; */
+		width: 15px;
 	}
 </style>
 

@@ -10,14 +10,11 @@ export const taskElement = (todo, list) => {
 	const editIcon = document.createElement('i');
 	const deleteIcon = document.createElement('i');
 
-	// editIcon.classList.add(cat);
 	editIcon.innerHTML = pen;
 	deleteIcon.innerHTML = trashCan;
 	checkbox.type = 'checkbox';
 	text.textContent = todo.text;
-	// deleteButton.textContent = 'Delete';
 	deleteButton.classList.add('delete-button');
-	// editButton.innerText = ;
 	editButton.classList.add('edit-button');
 	editInput.type = 'text';
 	editInput.style.display = 'none';
@@ -67,7 +64,7 @@ export const taskElement = (todo, list) => {
 		}
 	});
 
-	editIcon.addEventListener('click', () => {
+	editButton.addEventListener('click', () => {
 		if (editInput.style.display === 'none') {
 			editInput.style.display = 'inline-block';
 			editInput.value = text.textContent;
@@ -96,10 +93,8 @@ export const taskElement = (todo, list) => {
 	listItem.appendChild(checkbox);
 	listItem.appendChild(text);
 	listItem.appendChild(editInput);
-	// listItem.appendChild(editIcon);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
-	// listItem.appendChild(deleteIcon);
 
 	return listItem;
 };
