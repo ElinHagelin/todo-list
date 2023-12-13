@@ -1,28 +1,27 @@
 <style>
-	.add-container {
-		margin-top: 10px;
-	}
-
-	.add-input-container {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+	.add-todo {
+		display: grid;
+		padding: 0.5em;
 		background-color: #edeef0;
 		border-radius: 30px;
+		grid-template-columns: 2fr auto;
+		grid-template-rows: auto auto;
+		grid-template-areas: 'input button' 'priority button';
+		box-shadow: 0.2em 0.2em 0.4em #ccc;
 	}
 
 	#todo-input {
-		width: 100%;
+		grid-area: input;
 		border: none;
 		outline: none;
 		background-color: transparent;
 		padding: 10px;
 		font-size: 17px;
-		padding-left: 20px;
 		color: black;
 	}
 
 	.add-button {
+		grid-area: button;
 		border: none;
 		cursor: pointer;
 		outline: none;
@@ -30,13 +29,13 @@
 		border-radius: 30px;
 		background-color: #ff5945;
 		color: #fff;
-		font-size: 18px;
 		transition: all 0.25s ease;
 		display: inline-flex;
+		align-items: center;
+		margin: 1em;
 	}
 
 	.add-button > i {
-		/* color: rgb(29, 29, 29); */
 		width: 20px;
 		margin-bottom: -2px;
 	}
@@ -46,6 +45,8 @@
 	}
 
 	.radio-container {
+		grid-area: priority;
+		margin-top: 10px;
 		display: flex;
 		justify-content: space-around;
 	}
@@ -57,37 +58,26 @@
 		gap: 0.3em;
 	}
 
-	/* input[type='radio']:checked {
-		color: #8f8f8f;
-	} */
-
 	input[type='radio'] {
 		appearance: none;
 		width: 15px;
 		height: 15px;
 		border-radius: 50%;
 		background-clip: content-box;
-		/* border: 1px solid black; */
 		border: 1px solid #8f8f8f;
-		/* background-color: black; */
 		transition: all 0.2s;
 	}
 
 	input[type='radio']:checked {
-		/* background-color: #8f8f8f;
-		padding: 3px;
-		border: 1px solid #8f8f8f; */
 		background-color: rgb(36, 0, 128);
 		padding: 3px;
 		border: 1px solid rgb(36, 0, 128);
 	}
 </style>
 
-<div class="add-container">
-	<div class="add-input-container">
-		<input type="text" id="todo-input" />
-		<button class="add-button"></button>
-	</div>
+<div class="add-todo">
+	<input type="text" id="todo-input" placeholder="Add a new task" />
+	<button class="add-button"></button>
 	<div class="radio-container">
 		<div>
 			<input type="radio" id="low" name="priority" checked />

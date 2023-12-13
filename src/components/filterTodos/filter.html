@@ -1,24 +1,30 @@
 <style>
 	.filter-todos {
 		margin-top: 10px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 2em;
+		gap: 1.5em;
 	}
 
 	.search-container {
 		display: flex;
+		flex-grow: 1;
 		align-items: center;
 		justify-content: space-between;
 		background-color: #edeef0;
 		border-radius: 30px;
+		box-shadow: 0.2em 0.2em 0.4em #ccc;
 	}
 
 	#search-input {
-		width: 100%;
+		/* width: 100%; */
 		border: none;
 		outline: none;
 		background-color: transparent;
-		padding: 10px;
-		font-size: 17px;
-		padding-left: 20px;
+		padding: 5px 5px 5px 18px;
+		font-size: 14px;
 		color: black;
 	}
 
@@ -26,7 +32,7 @@
 		border: none;
 		cursor: pointer;
 		outline: none;
-		padding: 10px 30px;
+		padding: 5px 20px;
 		border-radius: 30px;
 		background-color: #ff5945;
 		color: #fff;
@@ -36,8 +42,7 @@
 	}
 
 	.search-button > i {
-		width: 20px;
-		/* color: rgb(29, 29, 29); */
+		width: 10px;
 	}
 
 	.search-button:hover {
@@ -46,8 +51,8 @@
 
 	.filter-container {
 		display: flex;
-		justify-content: space-around;
-		margin: 0.5em 0;
+		gap: 1em;
+		padding: 0 10px;
 	}
 
 	.filter-checkbox-container,
@@ -58,15 +63,12 @@
 	}
 
 	#filter-checkbox {
-		/* margin-right: 10px; */
-
 		-webkit-appearance: none;
 		appearance: none;
 		width: 1.15em;
 		height: 1.15em;
 		border: 1px solid #000;
 		border-radius: 2px;
-		transform: translateY(-0.075em);
 		display: grid;
 		place-content: center;
 		cursor: pointer;
@@ -93,22 +95,17 @@
 
 <div class="filter-todos">
 	<div class="search-container">
-		<input type="text" id="search-input" />
+		<input type="text" id="search-input" placeholder="Search for task" />
 		<button class="search-button"></button>
 	</div>
+
 	<div class="filter-container">
-		<div class="filter-checkbox-container">
-			<label for="filter-checkbox">Filter by status</label>
-			<input type="checkbox" id="filter-checkbox" />
-		</div>
-		<div class="select-container">
-			<label for="priority-select">Filter by priority</label>
-			<select name="priority-filter" id="priority-select">
-				<option value="all">All</option>
-				<option value="low">Low</option>
-				<option value="medium">Medium</option>
-				<option value="high">High</option>
-			</select>
-		</div>
+		<input type="checkbox" id="filter-checkbox" />
+		<select name="priority-filter" id="priority-select">
+			<option value="all">All</option>
+			<option value="low">Low</option>
+			<option value="medium">Medium</option>
+			<option value="high">High</option>
+		</select>
 	</div>
 </div>

@@ -1,8 +1,9 @@
-import { pen, trashCan } from '../../assets/icons';
+import { circle, pen, trashCan } from '../../assets/icons';
 
 export const taskElement = (todo, list) => {
 	const listItem = document.createElement('li');
 	const checkbox = document.createElement('input');
+	const priorityIndicator = document.createElement('span');
 	const text = document.createElement('span');
 	const deleteButton = document.createElement('button');
 	const editButton = document.createElement('button');
@@ -13,11 +14,29 @@ export const taskElement = (todo, list) => {
 	editIcon.innerHTML = pen;
 	deleteIcon.innerHTML = trashCan;
 	checkbox.type = 'checkbox';
+	priorityIndicator.classList.add('priority-indicator');
 	text.textContent = todo.text;
+	text.classList.add('todo-text');
 	deleteButton.classList.add('delete-button');
 	editButton.classList.add('edit-button');
 	editInput.type = 'text';
 	editInput.style.display = 'none';
+
+	const createDot = (color) => {
+		const dot = document.createElement('i');
+		dot.innerHTML = circle;
+		dot.classList.add('dot');
+		// priorityIndicator.appendChild(dot);
+		if (todo.priority === 'low') {
+			dot.style.color = '#54b23a';
+		} else if (todo.priority === 'medium') {
+			dot.style.color = '#fdcf44';
+		} else if (todo.priority === 'high') {
+			dot.style.color = '#f53c3c';
+		}
+		return dot;
+	};
+	const dot = createDot();
 
 	if (todo.done === true) {
 		checkbox.checked = true;
@@ -92,6 +111,8 @@ export const taskElement = (todo, list) => {
 
 	listItem.appendChild(checkbox);
 	listItem.appendChild(text);
+	// listItem.appendChild(priorityIndicator);
+	listItem.appendChild(dot);
 	listItem.appendChild(editInput);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
