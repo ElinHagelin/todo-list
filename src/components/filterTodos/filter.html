@@ -2,10 +2,10 @@
 	.filter-todos {
 		margin-top: 10px;
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
 		margin-top: 2em;
 		gap: 1.5em;
+		flex-wrap: wrap;
 	}
 
 	.search-container {
@@ -19,11 +19,10 @@
 	}
 
 	#search-input {
-		/* width: 100%; */
 		border: none;
 		outline: none;
 		background-color: transparent;
-		padding: 5px 5px 5px 18px;
+		padding: 5px 5px 5px 20px;
 		font-size: 14px;
 		color: black;
 	}
@@ -51,8 +50,10 @@
 
 	.filter-container {
 		display: flex;
+		justify-content: space-between;
 		gap: 1em;
 		padding: 0 10px;
+		width: 100%;
 	}
 
 	.filter-checkbox-container,
@@ -90,6 +91,17 @@
 
 	#filter-checkbox:checked::before {
 		transform: scale(1.1);
+	}
+
+	option:hover {
+		background: purple;
+	}
+
+	@media screen and (min-width: 470px) {
+		.filter-container {
+			justify-content: space-between;
+			width: unset;
+		}
 	}
 </style>
 

@@ -1,11 +1,13 @@
 <style>
 	.todo-container {
-		max-width: 600px;
-		height: 70vh;
+		max-width: 700px;
+		max-height: 70vh;
+		display: flex;
+		flex-direction: column;
 		margin: 0 auto;
 		font-family: Arial, sans-serif;
 		background-color: #fff;
-		padding: 2em 5em 3em;
+		padding: 2em 1em;
 		border-radius: 10px;
 	}
 
@@ -17,9 +19,9 @@
 	.list {
 		list-style: none;
 		padding-inline: 0;
-		padding: 0;
+		display: flex;
+		flex-direction: column;
 		overflow-y: auto;
-		max-height: calc(50vh - 5em);
 		margin-block-start: 0.5em;
 		margin-block-end: 0;
 
@@ -41,7 +43,9 @@
 	.list li {
 		margin: 10px 0;
 		padding: 10px;
-		display: flex;
+		display: grid;
+		grid-template-columns: 1fr 7fr 1fr;
+		grid-template-areas: 'checkbox todo dot';
 		align-items: center;
 		animation: fade linear both;
 		animation-timeline: view();
@@ -49,6 +53,7 @@
 	}
 
 	.list li input[type='checkbox'] {
+		grid-area: checkbox;
 		margin-right: 10px;
 		-webkit-appearance: none;
 		appearance: none;
@@ -83,17 +88,30 @@
 		color: #8f8f8f;
 	}
 
-	.todo-text {
+	.todo-text-span {
+		grid-area: todo;
 		flex-grow: 1;
+		max-width: 12em;
+		word-wrap: break-word;
+	}
+
+	.todo-text-span > p,
+	.todo-text-span > input {
+		margin-block-start: 0;
+		margin-block-end: 0;
+	}
+
+	.todo-text-span > input {
+		font-size: 1em;
 	}
 
 	.delete-button,
 	.edit-button {
+		display: none;
 		color: #fff;
 		border: none;
 		padding: 5px;
 		cursor: pointer;
-		display: inline-flex;
 		background-color: transparent;
 		margin: 0 0.2em;
 		transition: all 0.2s;
@@ -102,6 +120,14 @@
 	.delete-button:hover,
 	.edit-button:hover {
 		transform: scale(1.15);
+	}
+
+	.edit-button {
+		grid-area: edit;
+	}
+
+	.delete-button {
+		grid-area: delete;
 	}
 
 	.done {
@@ -114,6 +140,7 @@
 	}
 
 	.dot {
+		grid-area: dot;
 		width: 8px;
 		margin: 0 5px;
 	}
@@ -124,6 +151,28 @@
 		}
 		100% {
 			opacity: 1;
+		}
+	}
+
+	@media screen and (min-width: 410px) {
+		.todo-text-span {
+			max-width: 15em;
+		}
+	}
+
+	@media screen and (min-width: 630px) {
+		.todo-container {
+			padding: 2em 4em 3em;
+		}
+
+		.list li {
+			grid-template-columns: 1fr 7fr 1fr 1fr 1fr;
+			grid-template-areas: 'checkbox todo dot edit delete';
+		}
+
+		.delete-button,
+		.edit-button {
+			display: inline-flex;
 		}
 	}
 </style>

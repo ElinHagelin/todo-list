@@ -4,7 +4,8 @@ export const taskElement = (todo, list) => {
 	const listItem = document.createElement('li');
 	const checkbox = document.createElement('input');
 	const priorityIndicator = document.createElement('span');
-	const text = document.createElement('span');
+	const textSpan = document.createElement('span');
+	const text = document.createElement('p');
 	const deleteButton = document.createElement('button');
 	const editButton = document.createElement('button');
 	const editInput = document.createElement('input');
@@ -15,18 +16,17 @@ export const taskElement = (todo, list) => {
 	deleteIcon.innerHTML = trashCan;
 	checkbox.type = 'checkbox';
 	priorityIndicator.classList.add('priority-indicator');
-	text.textContent = todo.text;
-	text.classList.add('todo-text');
+	text.innerText = todo.text;
+	textSpan.classList.add('todo-text-span');
 	deleteButton.classList.add('delete-button');
 	editButton.classList.add('edit-button');
 	editInput.type = 'text';
 	editInput.style.display = 'none';
 
-	const createDot = (color) => {
+	const createDot = () => {
 		const dot = document.createElement('i');
 		dot.innerHTML = circle;
 		dot.classList.add('dot');
-		// priorityIndicator.appendChild(dot);
 		if (todo.priority === 'low') {
 			dot.style.color = '#54b23a';
 		} else if (todo.priority === 'medium') {
@@ -85,12 +85,12 @@ export const taskElement = (todo, list) => {
 
 	editButton.addEventListener('click', () => {
 		if (editInput.style.display === 'none') {
-			editInput.style.display = 'inline-block';
+			editInput.style.display = 'block';
 			editInput.value = text.textContent;
 			text.style.display = 'none';
 		} else {
 			editInput.style.display = 'none';
-			text.style.display = 'inline-block';
+			text.style.display = 'block';
 			const newText = editInput.value.trim();
 			if (newText !== '') {
 				text.textContent = newText;
@@ -108,12 +108,12 @@ export const taskElement = (todo, list) => {
 
 	editButton.append(editIcon);
 	deleteButton.append(deleteIcon);
+	textSpan.append(text);
+	textSpan.append(editInput);
 
 	listItem.appendChild(checkbox);
-	listItem.appendChild(text);
-	// listItem.appendChild(priorityIndicator);
+	listItem.appendChild(textSpan);
 	listItem.appendChild(dot);
-	listItem.appendChild(editInput);
 	listItem.appendChild(editButton);
 	listItem.appendChild(deleteButton);
 
